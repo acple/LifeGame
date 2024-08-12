@@ -28,4 +28,8 @@ public class OscillatorsTest
     [Fact]
     public void Octagon()
         => Run(Examples.Octagon, period: 5);
+
+    [Fact]
+    public void Galaxy()
+        => Run(Examples.Galaxy, period: 8);
 }
