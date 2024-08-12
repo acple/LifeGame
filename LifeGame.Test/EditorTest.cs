@@ -40,11 +40,24 @@ public class EditorTest
     [Fact]
     public void RotateTest()
     {
+        // [.O..]      [....]
+        // [.O..]  =>  [OOO.]
+        // [.O..]      [....]
         var blinker = Examples.Blinker;
         Assert.Equal(blinker.Advance(), blinker.Rotate());
 
-        var occtagon = Examples.Octagon;
-        Assert.Equal(occtagon, occtagon.Rotate());
+        var octagon = Examples.Octagon;
+        Assert.Equal(octagon, octagon.Rotate());
+    }
+
+    [Fact]
+    public void FlipTest()
+    {
+        var blinker = Examples.Blinker;
+        Assert.Equal(blinker.Advance(), blinker.Flip());
+
+        var clock = Examples.Clock;
+        Assert.Equal(clock.Advance(), clock.Flip());
     }
 
     [Fact]
@@ -72,8 +85,17 @@ public class EditorTest
         // [.O..]     [....]     [.O..]
         // [.O..]  +  [OOO.]  =  [OOO.]
         // [.O..]     [....]     [.O..]
-        // [....]     [....]     [....]
         var merged = Examples.Blinker.Merge(Examples.Blinker.Advance());
         Assert.Equal(new([new(1, 0), new(0, 1), new(1, 1), new(2, 1), new(1, 2)]), merged);
+    }
+
+    [Fact]
+    public void ExceptTest()
+    {
+        // [.O..]     [....]     [.O..]
+        // [.O..]  -  [OOO.]  =  [....]
+        // [.O..]     [....]     [.O..]
+        var except = Examples.Blinker.Except(Examples.Blinker.Advance());
+        Assert.Equal(new([new(1, 0), new(1, 2)]), except);
     }
 }
