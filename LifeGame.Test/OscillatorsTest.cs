@@ -2,7 +2,7 @@ namespace LifeGame.Test;
 
 public class OscillatorsTest
 {
-    private static void Run(int period, Board board)
+    private static void Run(Board board, int period)
     {
         var state = board.EnumerateGenerations().Select(x => x).Take(period * 2).ToArray();
 
@@ -11,21 +11,21 @@ public class OscillatorsTest
 
     [Fact]
     public void Blinker()
-        => Run(period: 2, Examples.Blinker);
+        => Run(Examples.Blinker, period: 2);
 
     [Fact]
     public void Toad()
-        => Run(period: 2, Examples.Toad);
+        => Run(Examples.Toad, period: 2);
 
     [Fact]
     public void Beacon()
-        => Run(period: 2, Examples.Beacon);
+        => Run(Examples.Beacon, period: 2);
 
     [Fact]
     public void Clock()
-        => Run(period: 2, Examples.Clock);
+        => Run(Examples.Clock, period: 2);
 
     [Fact]
     public void Octagon()
-        => Run(period: 5, Examples.Octagon);
+        => Run(Examples.Octagon, period: 5);
 }
