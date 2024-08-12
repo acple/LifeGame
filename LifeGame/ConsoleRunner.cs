@@ -29,7 +29,7 @@ public class ConsoleRunner(int width, int height) : IRunner
     public void PrintBoard(Board board)
     {
         var matrix = Enumerable.Range(0, height)
-            .Select(y => Enumerable.Range(0, width).Select(x => board.IsAliveCell(x, y)));
+            .Select(y => Enumerable.Range(0, width).Select(x => board.IsAliveCell(new(x, y))));
 
         foreach (var line in matrix)
             Console.WriteLine(line

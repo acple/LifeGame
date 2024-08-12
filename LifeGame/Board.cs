@@ -4,20 +4,18 @@ namespace LifeGame;
 
 public partial class Board(ImmutableHashSet<Cell> cells) : IEquatable<Board>
 {
-    private readonly ImmutableHashSet<Cell> cells = cells;
-
     public Board(IEnumerable<Cell> cells) : this(cells.ToImmutableHashSet())
     { }
 
-    public int AliveCellCount => this.cells.Count;
+    public int AliveCellCount => cells.Count;
 
-    public IReadOnlyCollection<Cell> AliveCells => this.cells;
+    public IReadOnlyCollection<Cell> AliveCells => cells;
 
-    public bool IsAliveCell(int x, int y)
-        => this.cells.Contains(new(x, y));
+    public bool IsAliveCell(Cell cell)
+        => cells.Contains(cell);
 
     public Board Advance()
-        => new(this.cells
+        => new(cells
             .SelectMany(cell => cell.Neighbors)
             .GroupBy(cell => cell)
             .Where(x => this.CheckState(x.Key, x.Count()))
@@ -27,7 +25,7 @@ public partial class Board(ImmutableHashSet<Cell> cells) : IEquatable<Board>
         => count switch
         {
             1 => false, // underpopulation
-            2 => this.cells.Contains(cell), // lives
+            2 => cells.Contains(cell), // lives
             3 => true, // reproduction
             _ => false, // overpopulation
         };
@@ -41,13 +39,13 @@ public partial class Board(ImmutableHashSet<Cell> cells) : IEquatable<Board>
     #region Equality definitions
 
     public override int GetHashCode()
-        => this.cells.Aggregate(0, HashCode.Combine);
+        => cells.Aggregate(0, HashCode.Combine);
 
     public override bool Equals(object? obj)
         => obj is Board board && this.Equals(board);
 
     public bool Equals(Board? other)
-        => other is not null && this.cells.SetEquals(other.cells);
+        => other is not null && cells.SetEquals(other.AliveCells);
 
     public static bool operator ==(Board left, Board right)
         => left.Equals(right);

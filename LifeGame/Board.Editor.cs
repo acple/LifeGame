@@ -3,45 +3,51 @@ namespace LifeGame;
 public partial class Board
 {
     public Board Truncate()
-        => new(this.cells.Where(cell => 0 <= cell.X && 0 <= cell.Y));
+        => new(cells.Where(cell => 0 <= cell.X && 0 <= cell.Y));
 
     public Board Truncate(int maxWidth, int maxHeight)
-        => new(this.cells.Where(cell => 0 <= cell.X && cell.X < maxWidth && 0 <= cell.Y && cell.Y < maxHeight));
+        => new(cells.Where(cell => 0 <= cell.X && cell.X < maxWidth && 0 <= cell.Y && cell.Y < maxHeight));
 
     public Board Translate(int x, int y)
-        => new(this.cells.Select(cell => new Cell(cell.X + x, cell.Y + y)));
+        => new(cells.Select(cell => new Cell(cell.X + x, cell.Y + y)));
 
     public Board Rotate()
     {
-        var y = this.cells.Max(cell => cell.Y);
-        return new(this.cells.Select(cell => new Cell(-cell.Y + y, cell.X)));
+        var y = cells.Max(cell => cell.Y);
+        return new(cells.Select(cell => new Cell(-cell.Y + y, cell.X)));
     }
 
     public Board Flip()
-        => new(this.cells.Select(cell => new Cell(cell.Y, cell.X)));
+        => new(cells.Select(cell => new Cell(cell.Y, cell.X)));
 
     public Board Normalize()
     {
-        var x = this.cells.Min(cell => cell.X);
-        var y = this.cells.Min(cell => cell.Y);
-        return new(this.cells.Select(cell => new Cell(cell.X - x, cell.Y - y)));
+        var x = cells.Min(cell => cell.X);
+        var y = cells.Min(cell => cell.Y);
+        return new(cells.Select(cell => new Cell(cell.X - x, cell.Y - y)));
     }
 
     public Board Merge(Board board)
-        => new(this.cells.Union(board.cells));
+        => new(cells.Union(board.AliveCells));
 
     public Board Except(Board board)
-        => new(this.cells.Except(board.cells));
+        => new(cells.Except(board.AliveCells));
 
     public Board AddCell(Cell cell)
-        => new(this.cells.Add(cell));
+        => new(cells.Add(cell));
 
-    public Board AddCells(IEnumerable<Cell> cells)
-        => new(this.cells.Union(cells));
+    public Board AddCell(params Cell[] cell)
+        => this.AddCell(cell.AsEnumerable());
+
+    public Board AddCell(IEnumerable<Cell> cell)
+        => new(cells.Union(cell));
 
     public Board RemoveCell(Cell cell)
-        => new(this.cells.Remove(cell));
+        => new(cells.Remove(cell));
 
-    public Board RemoveCells(IEnumerable<Cell> cells)
-        => new(this.cells.Except(cells));
+    public Board RemoveCell(params Cell[] cell)
+        => this.RemoveCell(cell.AsEnumerable());
+
+    public Board RemoveCell(IEnumerable<Cell> cell)
+        => new(cells.Except(cell));
 }
