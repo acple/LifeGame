@@ -11,6 +11,8 @@ public partial class Board(ImmutableHashSet<Cell> cells) : IEquatable<Board>
 
     public int AliveCellCount => this.cells.Count;
 
+    public IReadOnlyCollection<Cell> AliveCells => this.cells;
+
     public bool IsAliveCell(int x, int y)
         => this.cells.Contains(new(x, y));
 

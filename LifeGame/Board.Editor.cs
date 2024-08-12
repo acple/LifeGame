@@ -3,7 +3,7 @@ namespace LifeGame;
 public partial class Board
 {
     public Board Truncate()
-        => this.Truncate(int.MaxValue, int.MinValue);
+        => new(this.cells.Where(cell => 0 <= cell.X && 0 <= cell.Y));
 
     public Board Truncate(int maxWidth, int maxHeight)
         => new(this.cells.Where(cell => 0 <= cell.X && cell.X < maxWidth && 0 <= cell.Y && cell.Y < maxHeight));
