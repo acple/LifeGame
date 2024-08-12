@@ -7,8 +7,6 @@ public partial class Board(ImmutableHashSet<Cell> cells) : IEquatable<Board>
     public Board(IEnumerable<Cell> cells) : this(cells.ToImmutableHashSet())
     { }
 
-    public int AliveCellCount => cells.Count;
-
     public IReadOnlyCollection<Cell> AliveCells => cells;
 
     public bool IsAliveCell(Cell cell)

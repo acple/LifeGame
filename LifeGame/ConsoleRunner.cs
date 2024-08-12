@@ -19,7 +19,7 @@ public class ConsoleRunner(int width, int height) : IRunner
             var width = Console.WindowWidth;
 
             Console.WriteLine($"generations: {generation}".PadRight(width));
-            Console.WriteLine($"alive cells: {state.AliveCellCount}".PadRight(width));
+            Console.WriteLine($"alive cells: {state.AliveCells.Count}".PadRight(width));
             this.PrintBoard(state);
 
             await Task.Delay(intervalMilliseconds, cancellationToken);
