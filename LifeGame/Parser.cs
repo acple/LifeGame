@@ -14,7 +14,7 @@ public class Parser(char deadCell, char aliveCell) : IParser
     public Board Parse(string source)
     {
         var data = source
-            .Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .Split(['\r', '\n'], StringSplitOptions.TrimEntries)
             .Where(x => !x.StartsWith('!'))
             .ToArray();
 
