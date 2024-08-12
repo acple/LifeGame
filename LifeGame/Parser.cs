@@ -1,12 +1,17 @@
 namespace LifeGame;
 
-// https://conwaylife.com/wiki/Plaintext
-public class Parser
+public interface IParser
 {
-    public Board Parse(string source)
-        => this.Parse(source, deadCell: '.', aliveCell: 'O');
+    Board Parse(string source);
+}
 
-    public Board Parse(string source, char deadCell, char aliveCell)
+// https://conwaylife.com/wiki/Plaintext
+public class Parser(char deadCell, char aliveCell) : IParser
+{
+    public Parser() : this(deadCell: '.', aliveCell: 'O')
+    { }
+
+    public Board Parse(string source)
     {
         var data = source
             .Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
