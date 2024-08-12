@@ -16,9 +16,10 @@ public class ConsoleRunner(int width, int height) : IRunner
         foreach (var (state, generation) in board.EnumerateGenerations().Select((state, generation) => (state, generation)))
         {
             Console.SetCursorPosition(0, 0);
+            var width = Console.WindowWidth;
 
-            Console.WriteLine($"generations: {generation}");
-            Console.WriteLine($"alive cells: {state.AliveCellCount}");
+            Console.WriteLine($"generations: {generation}".PadRight(width));
+            Console.WriteLine($"alive cells: {state.AliveCellCount}".PadRight(width));
             this.PrintBoard(state);
 
             await Task.Delay(intervalMilliseconds, cancellationToken);
