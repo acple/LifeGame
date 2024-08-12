@@ -1,9 +1,13 @@
+using System.Collections.Immutable;
+
 namespace LifeGame;
 
-public partial class Board(IEnumerable<Cell> cells) : IEquatable<Board>
+public partial class Board(ImmutableHashSet<Cell> cells) : IEquatable<Board>
 {
-    // Must have a concrete type of HashSet<T> to use SetComparer, do not modify it's elements.
-    private readonly HashSet<Cell> cells = cells.ToHashSet();
+    private readonly ImmutableHashSet<Cell> cells = cells;
+
+    public Board(IEnumerable<Cell> cells) : this(cells.ToImmutableHashSet())
+    { }
 
     public int AliveCellCount => this.cells.Count;
 
@@ -32,12 +36,22 @@ public partial class Board(IEnumerable<Cell> cells) : IEquatable<Board>
             yield return current;
     }
 
+    #region Equality definitions
+
     public override int GetHashCode()
-        => HashSet<Cell>.CreateSetComparer().GetHashCode(this.cells);
+        => this.cells.Aggregate(0, HashCode.Combine);
 
     public override bool Equals(object? obj)
         => obj is Board board && this.Equals(board);
 
     public bool Equals(Board? other)
-        => other is not null && HashSet<Cell>.CreateSetComparer().Equals(this.cells, other.cells);
+        => other is not null && this.cells.SetEquals(other.cells);
+
+    public static bool operator ==(Board left, Board right)
+        => left.Equals(right);
+
+    public static bool operator !=(Board left, Board right)
+        => !(left == right);
+
+    #endregion
 }
