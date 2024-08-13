@@ -8,9 +8,9 @@ namespace LifeGame;
 public readonly record struct Cell(int X, int Y)
 {
     /// <summary>
-    /// Gets the neighboring cells of the current cell.
+    /// The neighboring cells of the current cell.
     /// </summary>
-    public readonly IReadOnlyCollection<Cell> Neighbors =>
+    public IReadOnlyCollection<Cell> Neighbors =>
     [
         new(this.X - 1, this.Y - 1),
         new(this.X + 0, this.Y - 1),

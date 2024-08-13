@@ -9,7 +9,7 @@ public partial class Board(ImmutableHashSet<Cell> cells) : IEquatable<Board>
     { }
 
     /// <summary>
-    /// Gets the collection of alive cells on the board.
+    /// The collection of alive cells on the board.
     /// </summary>
     public IReadOnlyCollection<Cell> AliveCells => cells;
 

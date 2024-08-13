@@ -1,12 +1,12 @@
 namespace LifeGame;
 
 /// <summary>
-/// Represents a runner for the game of life.
+/// Represents a runner for Conway's Game of Life.
 /// </summary>
 public interface IRunner
 {
     /// <summary>
-    /// Runs the game of life on the specified board.
+    /// Runs the game on the specified board.
     /// </summary>
     /// <param name="board">The game board.</param>
     /// <param name="intervalMilliseconds">The interval between generations in milliseconds.</param>

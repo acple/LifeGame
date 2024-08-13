@@ -22,4 +22,4 @@ var board = parser.Parse(source);
 
 var runner = new ConsoleRunner(36, 20);
 
-await runner.RunGame(board);
+await runner.RunGame(board.Translate(0, 0));

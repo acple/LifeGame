@@ -49,11 +49,7 @@ public partial class Board
     /// </summary>
     /// <returns>A new <see cref="Board"/> with normalized cells.</returns>
     public Board Normalize()
-    {
-        var x = cells.Min(cell => cell.X);
-        var y = cells.Min(cell => cell.Y);
-        return new(cells.Select(cell => new Cell(cell.X - x, cell.Y - y)));
-    }
+        => this.Translate(-cells.Min(cell => cell.X), -cells.Min(cell => cell.Y));
 
     /// <summary>
     /// Merges the current board with another board.
