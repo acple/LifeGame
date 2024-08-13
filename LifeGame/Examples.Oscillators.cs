@@ -2,18 +2,61 @@ namespace LifeGame;
 
 public static partial class Examples
 {
+    /// <summary>
+    /// <code>
+    /// □■□
+    /// □■□
+    /// □■□
+    /// </code>
+    /// </summary>
     public static Board Blinker =>
         new([new(1, 0), new(1, 1), new(1, 2)]);
 
+    /// <summary>
+    /// <code>
+    /// □□■□
+    /// ■□□■
+    /// ■□□■
+    /// □■□□
+    /// </code>
+    /// </summary>
     public static Board Toad =>
         new([new(2, 0), new(0, 1), new(3, 1), new(0, 2), new(3, 2), new(1, 3)]);
 
+    /// <summary>
+    /// <code>
+    /// ■■□□
+    /// ■□□□
+    /// □□□■
+    /// □□■■
+    /// </code>
+    /// </summary>
     public static Board Beacon =>
         new([new(0, 0), new(1, 0), new(0, 1), new(3, 2), new(2, 3), new(3, 3)]);
 
+    /// <summary>
+    /// <code>
+    /// □□■□
+    /// ■□■□
+    /// □■□■
+    /// □■□□
+    /// </code>
+    /// </summary>
     public static Board Clock =>
         new([new(2, 0), new(0, 1), new(2, 1), new(1, 2), new(3, 2), new(1, 3)]);
 
+    /// <summary>
+    /// <code>
+    /// □□□■■□□□
+    /// □□■□□■□□
+    /// □■□□□□■□
+    /// ■□□□□□□■
+    /// ■□□□□□□■
+    /// □■□□□□■□
+    /// □□■□□■□□
+    /// □□□■■□□□
+    /// </code>
+    /// </summary>
     public static Board Octagon =>
         new([
             new(3, 0), new(4, 0),
@@ -26,6 +69,19 @@ public static partial class Examples
             new(3, 7), new(4, 7),
         ]);
 
+    /// <summary>
+    /// <code>
+    /// ■■■■■■□■■
+    /// ■■■■■■□■■
+    /// □□□□□□□■■
+    /// ■■□□□□□■■
+    /// ■■□□□□□■■
+    /// ■■□□□□□■■
+    /// ■■□□□□□□□
+    /// ■■□■■■■■■
+    /// ■■□■■■■■■
+    /// </code>
+    /// </summary>
     public static Board Galaxy =>
         new([
             new(0, 0), new(1, 0), new(2, 0), new(3, 0), new(4, 0), new(5, 0), new(7, 0), new(8, 0),

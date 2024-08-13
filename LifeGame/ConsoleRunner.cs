@@ -2,8 +2,17 @@ using System.Text;
 
 namespace LifeGame;
 
+/// <summary>
+/// Represents a runner for the game of life.
+/// </summary>
 public interface IRunner
 {
+    /// <summary>
+    /// Runs the game of life on the specified board.
+    /// </summary>
+    /// <param name="board">The game board.</param>
+    /// <param name="intervalMilliseconds">The interval between generations in milliseconds.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
     Task RunGame(Board board, int intervalMilliseconds = 200, CancellationToken cancellationToken = default);
 }
 
