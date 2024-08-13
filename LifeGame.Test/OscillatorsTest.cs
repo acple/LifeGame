@@ -11,25 +11,25 @@ public class OscillatorsTest
 
     [Fact]
     public void Blinker()
-        => Run(Examples.Blinker, period: 2);
+        => Run(Patterns.Blinker, period: 2);
 
     [Fact]
     public void Toad()
-        => Run(Examples.Toad, period: 2);
+        => Run(Patterns.Toad, period: 2);
 
     [Fact]
     public void Beacon()
-        => Run(Examples.Beacon, period: 2);
+        => Run(Patterns.Beacon, period: 2);
 
     [Fact]
     public void Clock()
-        => Run(Examples.Clock, period: 2);
+        => Run(Patterns.Clock, period: 2);
 
     [Fact]
     public void Octagon()
-        => Run(Examples.Octagon, period: 5);
+        => Run(Patterns.Octagon, period: 5);
 
     [Fact]
     public void Galaxy()
-        => Run(Examples.Galaxy, period: 8);
+        => Run(Patterns.Galaxy, period: 8);
 }

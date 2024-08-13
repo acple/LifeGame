@@ -5,7 +5,7 @@ public class PrinterTest
     [Fact]
     public void PrintTest()
     {
-        var board = Examples.Octagon;
+        var board = Patterns.Octagon;
         var printer = new Printer(8, 8);
         var stringRepresentation = """
             □□□■■□□□

@@ -12,7 +12,7 @@ public class ParserTest
 
     [Fact]
     public void ParseBlock()
-        => Run(Examples.Block, """
+        => Run(Patterns.Block, """
             !comment
             OO
             OO
@@ -20,7 +20,7 @@ public class ParserTest
 
     [Fact]
     public void ParseOctagon()
-        => Run(Examples.Octagon, """
+        => Run(Patterns.Octagon, """
             ...OO...
             ..O..O..
             .O....O.

@@ -1,6 +1,6 @@
 namespace LifeGame;
 
-public static partial class Examples
+public static partial class Patterns
 {
     /// <summary>
     /// <code>

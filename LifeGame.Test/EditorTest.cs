@@ -9,7 +9,7 @@ public class EditorTest
             // [OO..]  =>  [O]
             // [OO..]
             // [....]
-            var truncated = Examples.Block.Truncate(1, 1);
+            var truncated = Patterns.Block.Truncate(1, 1);
             Assert.Equal(new([new(0, 0)]), truncated);
         }
 
@@ -22,7 +22,7 @@ public class EditorTest
             // [.O....O.]
             // [..O..O..]
             // [...OO...]
-            var truncated = Examples.Octagon.Truncate(6, 3);
+            var truncated = Patterns.Octagon.Truncate(6, 3);
             Assert.Equal(new([new(3, 0), new(4, 0), new(2, 1), new(5, 1), new(1, 2)]), truncated);
         }
     }
@@ -33,7 +33,7 @@ public class EditorTest
         // [OO..]      [....]
         // [OO..]  =>  [..OO]
         // [....]      [..OO]
-        var translated = Examples.Block.Translate(2, 1);
+        var translated = Patterns.Block.Translate(2, 1);
         Assert.Equal(new([new(2, 1), new(3, 1), new(2, 2), new(3, 2)]), translated);
     }
 
@@ -43,20 +43,20 @@ public class EditorTest
         // [.O..]      [....]
         // [.O..]  =>  [OOO.]
         // [.O..]      [....]
-        var blinker = Examples.Blinker;
+        var blinker = Patterns.Blinker;
         Assert.Equal(blinker.Advance(), blinker.Rotate());
 
-        var octagon = Examples.Octagon;
+        var octagon = Patterns.Octagon;
         Assert.Equal(octagon, octagon.Rotate());
     }
 
     [Fact]
     public void TransposeTest()
     {
-        var blinker = Examples.Blinker;
+        var blinker = Patterns.Blinker;
         Assert.Equal(blinker.Advance(), blinker.Transpose());
 
-        var clock = Examples.Clock;
+        var clock = Patterns.Clock;
         Assert.Equal(clock.Advance(), clock.Transpose());
     }
 
@@ -66,7 +66,7 @@ public class EditorTest
         // [.O..]      [O...]
         // [.O..]  =>  [O...]
         // [.O..]      [O...]
-        var vertical = Examples.Blinker;
+        var vertical = Patterns.Blinker;
         Assert.Equal(new([new(1, 0), new(1, 1), new(1, 2)]), vertical);
         Assert.Equal(new([new(0, 0), new(0, 1), new(0, 2)]), vertical.Normalize());
 
@@ -74,7 +74,7 @@ public class EditorTest
         Assert.Equal(new([new(0, 1), new(1, 1), new(2, 1)]), horizontal);
         Assert.Equal(new([new(0, 0), new(1, 0), new(2, 0)]), horizontal.Normalize());
 
-        var after = Examples.Blinker.Normalize().Advance();
+        var after = Patterns.Blinker.Normalize().Advance();
         Assert.Equal(new([new(-1, 1), new(0, 1), new(1, 1)]), after);
         Assert.Equal(new([new(0, 0), new(1, 0), new(2, 0)]), after.Normalize());
     }
@@ -85,7 +85,7 @@ public class EditorTest
         // [.O..]     [....]     [.O..]
         // [.O..]  +  [OOO.]  =  [OOO.]
         // [.O..]     [....]     [.O..]
-        var merged = Examples.Blinker.Merge(Examples.Blinker.Advance());
+        var merged = Patterns.Blinker.Merge(Patterns.Blinker.Advance());
         Assert.Equal(new([new(1, 0), new(0, 1), new(1, 1), new(2, 1), new(1, 2)]), merged);
     }
 
@@ -95,7 +95,7 @@ public class EditorTest
         // [.O..]     [....]     [.O..]
         // [.O..]  -  [OOO.]  =  [....]
         // [.O..]     [....]     [.O..]
-        var except = Examples.Blinker.Except(Examples.Blinker.Advance());
+        var except = Patterns.Blinker.Except(Patterns.Blinker.Advance());
         Assert.Equal(new([new(1, 0), new(1, 2)]), except);
     }
 }

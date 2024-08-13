@@ -11,21 +11,21 @@ public class StillLifesTest
 
     [Fact]
     public void Block()
-        => Run(Examples.Block);
+        => Run(Patterns.Block);
 
     [Fact]
     public void BeeHive()
-        => Run(Examples.BeeHive);
+        => Run(Patterns.BeeHive);
 
     [Fact]
     public void Loaf()
-        => Run(Examples.Loaf);
+        => Run(Patterns.Loaf);
 
     [Fact]
     public void Boat()
-        => Run(Examples.Boat);
+        => Run(Patterns.Boat);
 
     [Fact]
     public void Tub()
-        => Run(Examples.Tub);
+        => Run(Patterns.Tub);
 }
