@@ -51,13 +51,13 @@ public class EditorTest
     }
 
     [Fact]
-    public void FlipTest()
+    public void TransposeTest()
     {
         var blinker = Examples.Blinker;
-        Assert.Equal(blinker.Advance(), blinker.Flip());
+        Assert.Equal(blinker.Advance(), blinker.Transpose());
 
         var clock = Examples.Clock;
-        Assert.Equal(clock.Advance(), clock.Flip());
+        Assert.Equal(clock.Advance(), clock.Transpose());
     }
 
     [Fact]

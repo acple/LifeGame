@@ -41,7 +41,7 @@ public partial class Board
     /// Flips the board along the diagonal.
     /// </summary>
     /// <returns>A new <see cref="Board"/> with flipped cells.</returns>
-    public Board Flip()
+    public Board Transpose()
         => new(cells.Select(cell => new Cell(cell.Y, cell.X)));
 
     /// <summary>
