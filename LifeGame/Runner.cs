@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace LifeGame;
 
 /// <summary>
@@ -16,8 +14,11 @@ public interface IRunner
     Task RunGame(Board board, int intervalMilliseconds = 200, CancellationToken cancellationToken = default);
 }
 
-public class ConsoleRunner(int width, int height) : IRunner
+public class ConsoleRunner(IPrinter printer) : IRunner
 {
+    public ConsoleRunner(int width, int height) : this(new Printer(width, height))
+    { }
+
     public async Task RunGame(Board board, int intervalMilliseconds = 200, CancellationToken cancellationToken = default)
     {
         Console.Clear();
@@ -29,21 +30,9 @@ public class ConsoleRunner(int width, int height) : IRunner
 
             Console.WriteLine($"generations: {generation}".PadRight(width));
             Console.WriteLine($"alive cells: {state.AliveCells.Count}".PadRight(width));
-            this.PrintBoard(state);
+            Console.WriteLine(printer.PrintBoard(state));
 
             await Task.Delay(intervalMilliseconds, cancellationToken);
         }
-    }
-
-    public void PrintBoard(Board board)
-    {
-        var matrix = Enumerable.Range(0, height)
-            .Select(y => Enumerable.Range(0, width).Select(x => board.IsAliveCell(new(x, y))));
-
-        foreach (var line in matrix)
-            Console.WriteLine(line
-                .Select(alive => alive ? '■' : '□')
-                .Aggregate(new StringBuilder(width), (builder, cell) => builder.Append(cell))
-                .ToString());
     }
 }

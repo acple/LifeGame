@@ -13,14 +13,19 @@ public interface IParser
     Board Parse(string source);
 }
 
+public record PlaintextParserConfig(char DeadCell, char AliveCell);
+
 // https://conwaylife.com/wiki/Plaintext
-public class Parser(char deadCell, char aliveCell) : IParser
+public class PlaintextParser(PlaintextParserConfig config) : IParser
 {
-    public Parser() : this(deadCell: '.', aliveCell: 'O')
+    public PlaintextParser() : this(new('.', 'O'))
     { }
 
     public Board Parse(string source)
     {
+        var deadCell = config.DeadCell;
+        var aliveCell = config.AliveCell;
+
         var data = source
             .Split(['\r', '\n'], StringSplitOptions.TrimEntries)
             .Where(x => !x.StartsWith('!'))

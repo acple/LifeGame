@@ -1,6 +1,6 @@
 using LifeGame;
 
-var parser = new Parser();
+var parser = new PlaintextParser();
 
 var source = """
     !Name: Gosper glider gun

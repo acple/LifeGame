@@ -4,7 +4,7 @@ public class ParserTest
 {
     private static void Run(Board reference, string source)
     {
-        var parser = new Parser();
+        var parser = new PlaintextParser();
         var board = parser.Parse(source);
 
         Assert.Equal(reference, board);
