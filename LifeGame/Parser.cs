@@ -27,11 +27,11 @@ public class PlaintextParser(PlaintextParserConfig config) : IParser
         var aliveCell = config.AliveCell;
 
         var data = source
-            .Split(['\r', '\n'], StringSplitOptions.TrimEntries)
+            .Split('\n', StringSplitOptions.TrimEntries)
             .Where(x => !x.StartsWith('!'))
             .ToArray();
 
-        if (string.Concat(data) is var concat && concat.Distinct().Count() > 2 || !concat.Contains(deadCell) && !concat.Contains(aliveCell))
+        if (data.SelectMany(x => x).Any(x => x != deadCell && x != aliveCell))
             throw new ArgumentException("contains invalid char");
 
         var cells =
