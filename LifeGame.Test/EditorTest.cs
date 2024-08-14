@@ -44,10 +44,27 @@ public class EditorTest
         // [.O..]  =>  [OOO.]
         // [.O..]      [....]
         var blinker = Patterns.Blinker;
-        Assert.Equal(blinker.Advance(), blinker.Rotate());
+        Assert.Equal(blinker.Advance(), blinker.Rotate(1, 1));
 
+        // [OO..]      [.OO.]      [....]      [....]      [OO..]
+        // [OO..]  =>  [.OO.]  =>  [.OO.]  =>  [OO..]  =>  [OO..]
+        // [....]      [....]      [.OO.]      [OO..]      [....]
+        var block = Patterns.Block;
+        Assert.Equal(block.Translate(1, 0), block.Rotate(1, 1));
+        Assert.Equal(block.Translate(1, 1), block.Rotate(1, 1).Rotate(1, 1));
+        Assert.Equal(block.Translate(0, 1), block.Rotate(1, 1).Rotate(1, 1).Rotate(1, 1));
+        Assert.Equal(block, block.Rotate(1, 1).Rotate(1, 1).Rotate(1, 1).Rotate(1, 1));
+
+        // [...OO....]      [....OO...]
+        // [..O..O...]      [...O..O..]
+        // [.O....O..]      [..O....O.]
+        // [O......O.]  =>  [.O......O]
+        // [O...*..O.]      [.O..*...O]
+        // [.O....O..]      [..O....O.]
+        // [..O..O...]      [...O..O..]
+        // [...OO....]      [....OO...]
         var octagon = Patterns.Octagon;
-        Assert.Equal(octagon, octagon.Rotate());
+        Assert.Equal(octagon, octagon.Rotate(4, 4).Translate(-1, 0));
     }
 
     [Fact]

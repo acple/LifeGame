@@ -28,14 +28,20 @@ public partial class Board
         => new(cells.Select(cell => new Cell(cell.X + x, cell.Y + y)));
 
     /// <summary>
-    /// Rotates the board 90 degrees clockwise.
+    /// Rotates the board 90 degrees clockwise around the origin (0, 0).
     /// </summary>
     /// <returns>A new <see cref="Board"/> with rotated cells.</returns>
     public Board Rotate()
-    {
-        var y = cells.Max(cell => cell.Y);
-        return new(cells.Select(cell => new Cell(-cell.Y + y, cell.X)));
-    }
+        => new(cells.Select(cell => new Cell(-cell.Y, cell.X)));
+
+    /// <summary>
+    /// Rotates the board 90 degrees clockwise around the specified cell (x, y).
+    /// </summary>
+    /// <param name="x">The x-coordinate of the pivot cell.</param>
+    /// <param name="y">The y-coordinate of the pivot cell.</param>
+    /// <returns>A new <see cref="Board"/> with rotated cells.</returns>
+    public Board Rotate(int x, int y)
+        => new(cells.Select(cell => new Cell(-cell.Y + x + y, cell.X - x + y)));
 
     /// <summary>
     /// Flips the board along the diagonal.
