@@ -115,4 +115,22 @@ public class EditorTest
         var except = Patterns.Blinker.Except(Patterns.Blinker.Advance());
         Assert.Equal(new([new(1, 0), new(1, 2)]), except);
     }
+
+    [Fact]
+    public void FillTest()
+    {
+        var empty = Board.Empty;
+
+        var blinker = empty.Fill(new(1, 0), new(1, 2));
+
+        Assert.Equal(Patterns.Blinker, blinker);
+
+        var galaxy = empty
+            .Fill(new(0, 0), new(5, 1))
+            .Fill(new(7, 0), new(8, 5))
+            .Fill(new(8, 7), new(3, 8))
+            .Fill(new(1, 8), new(0, 3));
+
+        Assert.Equal(Patterns.Galaxy, galaxy);
+    }
 }

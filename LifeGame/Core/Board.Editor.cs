@@ -3,6 +3,11 @@ namespace LifeGame;
 public partial class Board
 {
     /// <summary>
+    /// The empty board.
+    /// </summary>
+    public static Board Empty { get; } = new([]);
+
+    /// <summary>
     /// Truncates the board to only include cells with non-negative coordinates.
     /// </summary>
     /// <returns>A new <see cref="Board"/> with truncated cells.</returns>
@@ -120,4 +125,25 @@ public partial class Board
     /// <returns>A new <see cref="Board"/> with the cells removed.</returns>
     public Board RemoveCell(IEnumerable<Cell> cell)
         => new(cells.Except(cell));
+
+    /// <summary>
+    /// Fills the board with cells in a rectangular region defined by the start and end cells, including the start and end cells.
+    /// </summary>
+    /// <param name="start">The starting cell of the region.</param>
+    /// <param name="end">The ending cell of the region.</param>
+    /// <returns>A new <see cref="Board"/> with the filled cells.</returns>
+    public Board Fill(Cell start, Cell end)
+        => this.Fill(Math.Min(start.X, end.X), Math.Min(start.Y, end.Y), Math.Abs(end.X - start.X) + 1, Math.Abs(end.Y - start.Y) + 1);
+
+    /// <summary>
+    /// Fills the board with cells in a rectangular region defined by the specified coordinates, width, and height.
+    /// </summary>
+    /// <param name="x">The x-coordinate of the top-left corner of the region.</param>
+    /// <param name="y">The y-coordinate of the top-left corner of the region.</param>
+    /// <param name="width">The width of the region.</param>
+    /// <param name="height">The height of the region.</param>
+    /// <returns>A new <see cref="Board"/> with the filled cells.</returns>
+    public Board Fill(int x, int y, int width, int height)
+        => this.AddCell(Enumerable.Range(x, width)
+            .SelectMany(_ => Enumerable.Range(y, height), (x, y) => new Cell(x, y)));
 }
