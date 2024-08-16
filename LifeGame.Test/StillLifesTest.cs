@@ -28,4 +28,16 @@ public class StillLifesTest
     [Fact]
     public void Tub()
         => Run(Patterns.Tub);
+
+    [Fact]
+    public void Carrier()
+        => Run(Patterns.Carrier);
+
+    [Fact]
+    public void Pond()
+        => Run(Patterns.Pond);
+
+    [Fact]
+    public void Snake()
+        => Run(Patterns.Snake);
 }

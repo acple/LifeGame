@@ -20,4 +20,12 @@ public class SpaceshipTest
     [Fact]
     public void LightweightSpaceship()
         => Run(Patterns.LightweightSpaceship, period: 4, x: 2, y: 0);
+
+    [Fact]
+    public void HeavyweightSpaceship()
+        => Run(Patterns.HeavyweightSpaceship, period: 4, x: 2, y: 0);
+
+    [Fact]
+    public void Copperhead()
+        => Run(Patterns.CopperHead, period: 10, x: 0, y: -1);
 }

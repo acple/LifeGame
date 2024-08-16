@@ -32,4 +32,16 @@ public class OscillatorsTest
     [Fact]
     public void Galaxy()
         => Run(Patterns.Galaxy, period: 8);
+
+    [Fact]
+    public void Pentadecathlon()
+        => Run(Patterns.Pentadecathlon, period: 15);
+
+    [Fact]
+    public void FigureEight()
+        => Run(Patterns.FigureEight, period: 8);
+
+    [Fact]
+    public void Pulsar()
+        => Run(Patterns.Pulsar, period: 3);
 }
