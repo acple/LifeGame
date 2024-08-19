@@ -40,10 +40,10 @@ public class EditorTest
     [Fact]
     public void RotateTest()
     {
-        // [.O..]      [....]
-        // [.O..]  =>  [OOO.]
-        // [.O..]      [....]
-        var blinker = Patterns.Blinker;
+        // [....]      [.O..]
+        // [OOO.]  =>  [.O..]
+        // [....]      [.O..]
+        var blinker = Patterns.Blinker.Translate(0, 1);
         Assert.Equal(blinker.Advance(), blinker.Rotate(1, 1));
 
         // [OO..]      [.OO.]      [....]      [....]      [OO..]
@@ -70,7 +70,7 @@ public class EditorTest
     [Fact]
     public void TransposeTest()
     {
-        var blinker = Patterns.Blinker;
+        var blinker = Patterns.Blinker.Translate(0, 1);
         Assert.Equal(blinker.Advance(), blinker.Transpose());
 
         var clock = Patterns.Clock;
@@ -80,40 +80,45 @@ public class EditorTest
     [Fact]
     public void NormalizeTest()
     {
+        var blinker = Patterns.Blinker.Translate(0, 1);
+
+        Assert.Equal(Patterns.Blinker, blinker.Normalize());
+
         // [.O..]      [O...]
         // [.O..]  =>  [O...]
         // [.O..]      [O...]
-        var vertical = Patterns.Blinker;
+        var vertical = blinker.Advance();
         Assert.Equal(new([new(1, 0), new(1, 1), new(1, 2)]), vertical);
         Assert.Equal(new([new(0, 0), new(0, 1), new(0, 2)]), vertical.Normalize());
 
-        var horizontal = vertical.Advance();
+        // [....]      [OOO.]
+        // [OOO.]  =>  [....]
+        // [....]      [....]
+        var horizontal = blinker;
         Assert.Equal(new([new(0, 1), new(1, 1), new(2, 1)]), horizontal);
         Assert.Equal(new([new(0, 0), new(1, 0), new(2, 0)]), horizontal.Normalize());
-
-        var after = Patterns.Blinker.Normalize().Advance();
-        Assert.Equal(new([new(-1, 1), new(0, 1), new(1, 1)]), after);
-        Assert.Equal(new([new(0, 0), new(1, 0), new(2, 0)]), after.Normalize());
     }
 
     [Fact]
     public void MergeTest()
     {
-        // [.O..]     [....]     [.O..]
-        // [.O..]  +  [OOO.]  =  [OOO.]
-        // [.O..]     [....]     [.O..]
-        var merged = Patterns.Blinker.Merge(Patterns.Blinker.Advance());
+        // [....]     [.O..]     [.O..]
+        // [OOO.]  +  [.O..]  =  [OOO.]
+        // [....]     [.O..]     [.O..]
+        var blinker = Patterns.Blinker.Translate(0, 1);
+        var merged = blinker.Merge(blinker.Advance());
         Assert.Equal(new([new(1, 0), new(0, 1), new(1, 1), new(2, 1), new(1, 2)]), merged);
     }
 
     [Fact]
     public void ExceptTest()
     {
-        // [.O..]     [....]     [.O..]
-        // [.O..]  -  [OOO.]  =  [....]
-        // [.O..]     [....]     [.O..]
-        var except = Patterns.Blinker.Except(Patterns.Blinker.Advance());
-        Assert.Equal(new([new(1, 0), new(1, 2)]), except);
+        // [....]     [.O..]     [....]
+        // [OOO.]  -  [.O..]  =  [O.O.]
+        // [....]     [.O..]     [....]
+        var blinker = Patterns.Blinker.Translate(0, 1);
+        var except = blinker.Except(blinker.Advance());
+        Assert.Equal(new([new(0, 1), new(2, 1)]), except);
     }
 
     [Fact]
@@ -121,7 +126,7 @@ public class EditorTest
     {
         var empty = Board.Empty;
 
-        var blinker = empty.Fill(new(1, 0), new(1, 2));
+        var blinker = empty.Fill(new(0, 0), new(2, 0));
 
         Assert.Equal(Patterns.Blinker, blinker);
 

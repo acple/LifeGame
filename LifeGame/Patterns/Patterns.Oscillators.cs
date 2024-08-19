@@ -4,13 +4,11 @@ public static partial class Patterns
 {
     /// <summary>
     /// <code>
-    /// □■□
-    /// □■□
-    /// □■□
+    /// ■■■
     /// </code>
     /// </summary>
     public static Board Blinker =>
-        new([new(1, 0), new(1, 1), new(1, 2)]);
+        new([new(0, 0), new(1, 0), new(2, 0)]);
 
     /// <summary>
     /// <code>
