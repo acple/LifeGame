@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ParsecSharp" Version="3.6.0" />
+    <PackageReference Include="ParsecSharp" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>
