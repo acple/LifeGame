@@ -28,9 +28,9 @@ public partial class Board(ImmutableHashSet<Cell> cells) : IEquatable<Board>
     public Board Advance()
         => new(cells
             .SelectMany(cell => cell.Neighbors)
-            .GroupBy(cell => cell)
-            .Where(x => this.CheckState(x.Key, x.Count()))
-            .Select(x => x.Key));
+            .GroupBy(cell => cell, (cell, x) => (cell, count: x.Count()))
+            .Where(x => this.CheckState(x.cell, x.count))
+            .Select(x => x.cell));
 
     /// <summary>
     /// Checks the state of the specified cell based on the count of its neighbors.

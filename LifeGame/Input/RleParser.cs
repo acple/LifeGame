@@ -7,7 +7,7 @@ namespace LifeGame;
 // https://conwaylife.com/wiki/Run_Length_Encoded
 public class RleParser : IParser
 {
-    private record State(int X, int Y, ImmutableHashSet<Cell> Cells);
+    private record State(int X, int Y, IEnumerable<Cell> Cells);
 
     private static readonly IParser<char, Board> parser = CreateParser();
 
@@ -33,7 +33,7 @@ public class RleParser : IParser
             => deadCell.Map(_ => state with { X = state.X + count });
 
         IParser<char, State> AliveCell(int count, State state)
-            => aliveCell.Map(_ => state with { X = state.X + count, Cells = state.Cells.Union(Enumerable.Range(state.X, count).Select(x => new Cell(x, state.Y))) });
+            => aliveCell.Map(_ => state with { X = state.X + count, Cells = state.Cells.Concat(Enumerable.Range(state.X, count).Select(x => new Cell(x, state.Y))) });
 
         var rle = Pure(new State(0, 0, []))
             .Chain(state => count.Bind(count => Choice(Newline(count, state), DeadCell(count, state), AliveCell(count, state))))

@@ -4,7 +4,7 @@ public class OscillatorsTest
 {
     private static void Run(Board board, int period)
     {
-        var state = board.EnumerateGenerations().Select(x => x).Take(period * 2).ToArray();
+        var state = board.EnumerateGenerations().Take(period * 2).ToArray();
 
         Assert.Equal(state[..period], state[period..]);
     }

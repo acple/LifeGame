@@ -17,11 +17,11 @@ public partial class Board
     /// <summary>
     /// Truncates the board to fit within the specified width and height.
     /// </summary>
-    /// <param name="maxWidth">The maximum width of the board.</param>
-    /// <param name="maxHeight">The maximum height of the board.</param>
+    /// <param name="width">The maximum width of the board.</param>
+    /// <param name="height">The maximum height of the board.</param>
     /// <returns>A new <see cref="Board"/> with truncated cells.</returns>
-    public Board Truncate(int maxWidth, int maxHeight)
-        => new(cells.Where(cell => 0 <= cell.X && cell.X < maxWidth && 0 <= cell.Y && cell.Y < maxHeight));
+    public Board Truncate(int width, int height)
+        => new(cells.Where(cell => 0 <= cell.X && cell.X < width && 0 <= cell.Y && cell.Y < height));
 
     /// <summary>
     /// Translates the board by the specified x and y offsets.
