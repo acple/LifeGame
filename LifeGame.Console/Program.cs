@@ -1,7 +1,5 @@
 using LifeGame;
 
-var parser = new PlaintextParser();
-
 var source = """
     !Name: Gosper glider gun
     !Author: Bill Gosper
@@ -17,6 +15,8 @@ var source = """
     ...........O...O
     ............OO
     """;
+
+var parser = new PlaintextParser();
 
 var board = parser.Parse(source);
 
